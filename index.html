@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ultimate Toastie Bar</title>
+    <title>Ham's Toastie Bar</title>
     <style>
         :root {
             --black: #000000;
@@ -38,12 +38,28 @@
             text-align: center;
         }
 
+        /* Header Layout: Image next to Title */
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-container img {
+            width: 60px; /* Adjust size as needed */
+            height: 60px;
+            object-fit: contain;
+        }
+
         h1 {
             color: var(--purple);
-            margin: 0 0 10px 0;
+            margin: 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 2.2rem;
+            letter-spacing: 1px;
+            font-size: 1.8rem;
+            line-height: 1.2;
         }
 
         .options {
@@ -112,7 +128,10 @@
 <body>
 
 <div class="card">
-    <h1>Toastie Bar</h1>
+    <div class="header-container">
+        <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo">
+        <h1>Ham's Toastie Bar</h1>
+    </div>
     
     <div class="options">
         <div class="radio-group"><input type="radio" id="meat" name="diet" value="meat" checked><label for="meat">Meat</label></div>
