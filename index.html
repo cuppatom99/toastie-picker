@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--cream);
+            background-color: var(--orange); /* Page background is now Orange */
             color: var(--black);
             display: flex;
             justify-content: center;
@@ -30,36 +30,43 @@
         .card {
             background: var(--white);
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 12px 12px 0px var(--purple);
-            border: 3px solid var(--black);
-            max-width: 550px;
+            border-radius: 30px;
+            box-shadow: 15px 15px 0px var(--black);
+            border: 4px solid var(--black);
+            max-width: 500px;
             width: 100%;
             text-align: center;
         }
 
-        /* Header Layout: Image next to Title */
+        /* Header Layout: Stacked Title and Larger Image */
         .header-container {
             display: flex;
+            flex-direction: column; /* Stacks items vertically */
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 25px;
         }
 
         .header-container img {
-            width: 60px; /* Adjust size as needed */
-            height: 60px;
+            width: 120px; /* Made the image significantly bigger */
+            height: auto;
             object-fit: contain;
+            margin-bottom: 10px;
         }
 
         h1 {
             color: var(--purple);
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 1.8rem;
-            line-height: 1.2;
+            letter-spacing: 2px;
+            font-size: 2.5rem; /* Larger font for the stacked look */
+            line-height: 0.9;  /* Tight spacing for the stacked words */
+            font-weight: 900;
+        }
+
+        .title-word {
+            display: block; /* Forces each word onto a new line */
         }
 
         .options {
@@ -72,7 +79,7 @@
         .radio-group input { display: none; }
         .radio-group label {
             display: block;
-            padding: 10px 20px;
+            padding: 10px 15px;
             background: var(--cream);
             border: 2px solid var(--black);
             border-radius: 12px;
@@ -106,13 +113,13 @@
             text-transform: uppercase;
         }
 
-        #go-btn { background: var(--orange); color: var(--white); }
+        #go-btn { background: var(--purple); color: var(--white); } /* Changed to purple for contrast */
         #surprise-btn { background: var(--yellow); color: var(--black); }
         button:active { transform: scale(0.95); }
 
         #result-container {
             background: var(--cream);
-            border: 3px dashed var(--purple);
+            border: 3px dashed var(--orange);
             border-radius: 15px;
             padding: 20px;
             margin-top: 20px;
@@ -130,7 +137,11 @@
 <div class="card">
     <div class="header-container">
         <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo">
-        <h1>Ham's Toastie Bar</h1>
+        <h1>
+            <span class="title-word">HAM'S</span>
+            <span class="title-word">TOASTIE</span>
+            <span class="title-word">BAR</span>
+        </h1>
     </div>
     
     <div class="options">
@@ -141,7 +152,7 @@
 
     <div class="button-group">
         <button id="go-btn">GO</button>
-        <button id="surprise-btn">Surprise Me</button>
+        <button id="surprise-btn">Surprise</button>
     </div>
 
     <div id="result-container">
@@ -155,6 +166,7 @@
 </div>
 
 <script>
+    // Logic remains the same as previous version to ensure all 30 toasties and 21 dips work perfectly
     const menus = {
         meat: [
             "Ham & Extra Mature Cheddar", "Chicken, Pesto & Mozzarella", "Bacon, Brie & Cranberry", 
