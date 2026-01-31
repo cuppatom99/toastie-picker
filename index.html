@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--orange); /* Page background is now Orange */
+            background-color: var(--orange);
             color: var(--black);
             display: flex;
             justify-content: center;
@@ -38,42 +38,43 @@
             text-align: center;
         }
 
-        /* Header Layout: Stacked Title and Larger Image */
         .header-container {
             display: flex;
-            flex-direction: column; /* Stacks items vertically */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .header-container img {
-            width: 120px; /* Made the image significantly bigger */
+            width: 120px;
             height: auto;
             object-fit: contain;
-            margin-bottom: 10px;
         }
 
         h1 {
             color: var(--purple);
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 2.5rem; /* Larger font for the stacked look */
-            line-height: 0.9;  /* Tight spacing for the stacked words */
+            letter-spacing: 1px;
+            font-size: 2.2rem;
             font-weight: 900;
         }
 
-        .title-word {
-            display: block; /* Forces each word onto a new line */
+        .tagline {
+            font-size: 1rem;
+            color: #444;
+            margin-top: 5px;
+            font-weight: 500;
+            line-height: 1.4;
         }
 
         .options {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         .radio-group input { display: none; }
@@ -113,7 +114,7 @@
             text-transform: uppercase;
         }
 
-        #go-btn { background: var(--purple); color: var(--white); } /* Changed to purple for contrast */
+        #go-btn { background: var(--purple); color: var(--white); }
         #surprise-btn { background: var(--yellow); color: var(--black); }
         button:active { transform: scale(0.95); }
 
@@ -137,16 +138,13 @@
 <div class="card">
     <div class="header-container">
         <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo">
-        <h1>
-            <span class="title-word">HAM'S</span>
-            <span class="title-word">TOASTIE</span>
-            <span class="title-word">BAR</span>
-        </h1>
+        <h1>Ham's Toastie Bar</h1>
+        <p class="tagline">Having trouble choosing your toastie flavours? Ham's here to help!</p>
     </div>
     
     <div class="options">
         <div class="radio-group"><input type="radio" id="meat" name="diet" value="meat" checked><label for="meat">Meat</label></div>
-        <div class="radio-group"><input type="radio" id="vege" name="diet" value="vege"><label for="vege">Vege</label></div>
+        <div class="radio-group"><input type="radio" id="vege" name="diet" value="vege"><label for="vege">Vegetarian</label></div>
         <div class="radio-group"><input type="radio" id="vegan" name="diet" value="vegan"><label for="vegan">Vegan</label></div>
     </div>
 
@@ -166,7 +164,6 @@
 </div>
 
 <script>
-    // Logic remains the same as previous version to ensure all 30 toasties and 21 dips work perfectly
     const menus = {
         meat: [
             "Ham & Extra Mature Cheddar", "Chicken, Pesto & Mozzarella", "Bacon, Brie & Cranberry", 
