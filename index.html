@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Toastie Picker</title>
+    <title>The Ultimate Toastie Bar</title>
     <style>
         :root {
             --black: #000000;
@@ -22,27 +22,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .card {
             background: var(--white);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 10px 10px 0px var(--purple);
+            box-shadow: 12px 12px 0px var(--purple);
             border: 3px solid var(--black);
-            max-width: 450px;
-            width: 90%;
+            max-width: 550px;
+            width: 100%;
             text-align: center;
         }
 
         h1 {
             color: var(--purple);
-            margin-top: 0;
+            margin: 0 0 10px 0;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
 
         .options {
@@ -52,22 +53,19 @@
             margin: 20px 0;
         }
 
-        .radio-group { position: relative; }
-
-        input[type="radio"] { display: none; }
-
-        label {
+        .radio-group input { display: none; }
+        .radio-group label {
             display: block;
-            padding: 10px 15px;
+            padding: 10px 20px;
             background: var(--cream);
             border: 2px solid var(--black);
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
             transition: 0.2s;
         }
 
-        input[type="radio"]:checked + label {
+        .radio-group input:checked + label {
             background: var(--blue);
             color: var(--white);
             transform: translateY(-3px);
@@ -76,128 +74,134 @@
 
         .button-group {
             display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 10px;
+            gap: 15px;
+            margin: 25px 0;
         }
 
         button {
             border: 3px solid var(--black);
-            padding: 12px 20px;
+            padding: 15px;
             font-size: 1.1rem;
             font-weight: 900;
             border-radius: 50px;
             cursor: pointer;
             transition: 0.1s;
             flex: 1;
+            text-transform: uppercase;
         }
 
-        #go-btn {
-            background: var(--orange);
-            color: var(--white);
-        }
-
-        #surprise-btn {
-            background: var(--yellow);
-            color: var(--black);
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
+        #go-btn { background: var(--orange); color: var(--white); }
+        #surprise-btn { background: var(--yellow); color: var(--black); }
+        button:active { transform: scale(0.95); }
 
         #result-container {
-            margin-top: 30px;
-            min-height: 80px;
+            background: var(--cream);
+            border: 3px dashed var(--purple);
+            border-radius: 15px;
             padding: 20px;
-            border-radius: 10px;
-            background-color: var(--white);
-            border: 3px solid var(--blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--purple);
+            margin-top: 20px;
+            text-align: left;
         }
+
+        .label { font-size: 0.8rem; font-weight: 800; color: var(--orange); text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .toastie-text { font-size: 1.5rem; font-weight: 900; color: var(--purple); display: block; margin-bottom: 15px; line-height: 1.2; }
+        .dip-name { font-size: 1.2rem; font-weight: 700; color: var(--black); display: block; }
+        .dip-instructions { font-size: 1rem; color: #555; font-style: italic; display: block; margin-top: 5px; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>Toastie Picker</h1>
-    <p>What's the vibe today?</p>
+    <h1>Toastie Bar</h1>
     
     <div class="options">
-        <div class="radio-group">
-            <input type="radio" id="meat" name="diet" value="meat" checked>
-            <label for="meat">Meat</label>
-        </div>
-        <div class="radio-group">
-            <input type="radio" id="vege" name="diet" value="vege">
-            <label for="vege">Vege</label>
-        </div>
-        <div class="radio-group">
-            <input type="radio" id="vegan" name="diet" value="vegan">
-            <label for="vegan">Vegan</label>
-        </div>
+        <div class="radio-group"><input type="radio" id="meat" name="diet" value="meat" checked><label for="meat">Meat</label></div>
+        <div class="radio-group"><input type="radio" id="vege" name="diet" value="vege"><label for="vege">Vege</label></div>
+        <div class="radio-group"><input type="radio" id="vegan" name="diet" value="vegan"><label for="vegan">Vegan</label></div>
     </div>
 
     <div class="button-group">
         <button id="go-btn">GO</button>
-        <button id="surprise-btn">SURPRISE ME</button>
+        <button id="surprise-btn">Surprise Me</button>
     </div>
 
     <div id="result-container">
-        <span id="result-text">Hungry? Press a button!</span>
+        <span class="label">Main Event</span>
+        <span id="toastie-out" class="toastie-text">Ready to order?</span>
+        
+        <span class="label">Side Dip</span>
+        <span id="dip-name-out" class="dip-name">—</span>
+        <span id="dip-recipe-out" class="dip-instructions">Select a diet and press GO.</span>
     </div>
 </div>
 
 <script>
     const menus = {
         meat: [
-            "Classic Ham & Extra Mature Cheddar",
-            "Chicken, Pesto & Mozzarella",
-            "Bacon, Brie & Cranberry",
-            "Tuna Melt with Red Onion & Capers",
-            "Pastrami, Swiss Cheese & Gherkins"
+            "Ham & Extra Mature Cheddar", "Chicken, Pesto & Mozzarella", "Bacon, Brie & Cranberry", 
+            "Tuna Melt with Red Onion & Capers", "Pastrami, Swiss Cheese & Gherkins",
+            "BBQ Pulled Pork & Apple Slaw", "Chorizo, Manchego & Honey", 
+            "Meatball Marinara & Parmesan", "Salami, Jalapeño & Cream Cheese", "Turkey, Stuffing & Gravy Dip"
         ],
         vege: [
-            "Kimchi & Sharp Cheddar",
-            "Goats Cheese & Caramelised Onion",
-            "Spinach, Feta & Sun-dried Tomato",
-            "Tomato, Mozzarella & Basil Pesto",
-            "Brie, Apple & Walnut"
+            "Fried Egg & Cheddar Cheese", "Kimchi & Sharp Cheddar", "Goats Cheese & Caramelised Onion", 
+            "Spinach, Feta & Sun-dried Tomato", "Tomato, Mozzarella & Basil Pesto",
+            "Brie, Apple & Walnut", "Halloumi, Roasted Pepper & Harissa", 
+            "Mac & Cheese with Truffle Oil", "Pear, Gorgonzola & Honey", "Garlic Butter Mushroom & Swiss Cheese"
         ],
         vegan: [
-            "Vegan Cheese, Tomato & Chili Jam",
-            "Hummus, Roasted Peppers & Spinach",
-            "Mushroom Pate & Truffle Oil",
-            "Vegan Mozzarella & Garlic Mushrooms",
-            "Smashed Avocado & Chili Flakes"
+            "Vegan Cheese, Tomato & Chili Jam", "Hummus, Roasted Peppers & Spinach", "Mushroom Pate & Truffle Oil", 
+            "Vegan Mozzarella & Garlic Mushrooms", "Smashed Avocado & Chili Flakes",
+            "Tofu 'Bacon' & Vegan Smoked Gouda", "Refried Beans, Salsa & Vegan Jack", 
+            "Roasted Squash & Sage Pesto", "Falafel, Tahini & Pickled Cabbage", "Vegan Sausage & Red Onion Marmalade"
         ]
     };
 
-    const goBtn = document.getElementById('go-btn');
-    const surpriseBtn = document.getElementById('surprise-btn');
-    const resultDisplay = document.getElementById('result-text');
+    const dips = [
+        { name: "Traditional Burger Sauce", recipe: "Mix mayo, ketchup, mustard, and minced pickles." },
+        { name: "Coronation Sauce", recipe: "Mix mayo, mild curry powder, and a spoonful of mango chutney." },
+        { name: "Sriracha Mayo", recipe: "Whisk 3 parts mayo with 1 part Sriracha." },
+        { name: "Garlic Aioli", recipe: "Mix mayo with crushed garlic and a squeeze of lemon." },
+        { name: "Balsamic Glaze", recipe: "Simmer balsamic vinegar in a pan until thick and syrupy." },
+        { name: "Hot Honey", recipe: "Warm honey with a pinch of dried chili flakes." },
+        { name: "Chipotle Paste", recipe: "Blend canned chipotle peppers in adobo sauce until smooth." },
+        { name: "Chimichurri", recipe: "Mix chopped parsley, garlic, vinegar, and olive oil." },
+        { name: "Truffle Mayo", recipe: "Stir a few drops of truffle oil into plain mayo." },
+        { name: "Sweet Chili Sauce", recipe: "Serve straight from the bottle." },
+        { name: "Marinara Sauce", recipe: "Tomato sauce simmered with oregano and garlic." },
+        { name: "Pesto Oil", recipe: "Swirl a teaspoon of basil pesto into olive oil." },
+        { name: "Gochujang Mayo", recipe: "Mix mayo with a teaspoon of Korean chili paste." },
+        { name: "Ranch Dressing", recipe: "Mix mayo, sour cream, and dried dill." },
+        { name: "Brown Sauce (HP)", recipe: "Serve straight from the bottle." },
+        { name: "Dijon Mustard", recipe: "Serve neat for a sharp kick." },
+        { name: "Guacamole", recipe: "Mash avocado with lime juice and salt." },
+        { name: "Mango Chutney", recipe: "Serve straight from the jar." },
+        { name: "Jalapeño Cream Cheese", recipe: "Mix softened cream cheese with diced jalapeños." },
+        { name: "Barbecue Sauce", recipe: "Serve straight from the bottle." },
+        { name: "Pickled Onion Juice", recipe: "Use the vinegar straight from a pickled onion jar." }
+    ];
 
-    // Standard Picker
-    goBtn.addEventListener('click', () => {
-        const selectedDiet = document.querySelector('input[name="diet"]:checked').value;
-        const options = menus[selectedDiet];
-        displayResult(options[Math.floor(Math.random() * options.length)]);
-    });
+    const tOut = document.getElementById('toastie-out');
+    const dNameOut = document.getElementById('dip-name-out');
+    const dRecOut = document.getElementById('dip-recipe-out');
 
-    // Surprise Picker
-    surpriseBtn.addEventListener('click', () => {
-        const allOptions = [...menus.meat, ...menus.vege, ...menus.vegan];
-        displayResult(allOptions[Math.floor(Math.random() * allOptions.length)]);
-    });
-
-    function displayResult(text) {
-        resultDisplay.innerText = text;
+    function update(toastie) {
+        const dip = dips[Math.floor(Math.random() * dips.length)];
+        tOut.innerText = toastie;
+        dNameOut.innerText = dip.name;
+        dRecOut.innerText = dip.recipe;
     }
+
+    document.getElementById('go-btn').addEventListener('click', () => {
+        const diet = document.querySelector('input[name="diet"]:checked').value;
+        const list = menus[diet];
+        update(list[Math.floor(Math.random() * list.length)]);
+    });
+
+    document.getElementById('surprise-btn').addEventListener('click', () => {
+        const all = [...menus.meat, ...menus.vege, ...menus.vegan];
+        update(all[Math.floor(Math.random() * all.length)]);
+    });
 </script>
 
 </body>
