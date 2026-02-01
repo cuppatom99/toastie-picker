@@ -33,7 +33,7 @@
             border-radius: 30px;
             box-shadow: 15px 15px 0px var(--black);
             border: 4px solid var(--black);
-            max-width: 500px;
+            max-width: 600px; /* Increased card width slightly to accommodate bigger images */
             width: 100%;
             text-align: center;
         }
@@ -47,26 +47,33 @@
             margin-bottom: 20px;
         }
 
-        /* Enhanced spacing between the images */
         .logo-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 40px; /* Increased gap for better spacing */
+            gap: 40px; 
             margin-bottom: 15px;
             padding: 10px;
         }
 
-        .logo-row img {
+        /* Standard Ham Logo Size */
+        .ham-logo {
             max-width: 110px;
             height: auto;
             object-fit: contain;
-            transition: transform 0.2s;
         }
 
-        /* Hover effect to make the book link feel interactive */
-        .logo-row a:hover img {
-            transform: scale(1.1);
+        /* Book Cover (200% bigger than previous) */
+        .book-cover {
+            max-width: 220px; /* Doubled the size from 110px to 220px */
+            height: auto;
+            object-fit: contain;
+            transition: transform 0.2s;
+            display: block;
+        }
+
+        .logo-row a:hover .book-cover {
+            transform: scale(1.05);
         }
 
         h1 {
@@ -154,10 +161,10 @@
 <div class="card">
     <div class="header-container">
         <div class="logo-row">
-            <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo">
+            <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo" class="ham-logo">
             
             <a href="https://www.waterstones.com/book/ham-ed-and-chips/tom-phipps/9780722356852" target="_blank">
-                <img src="https://github.com/cuppatom99/toastie-picker/blob/main/HEC-cover-for-games.png?raw=true" alt="Ham Ed and Chips Book Cover">
+                <img src="https://github.com/cuppatom99/toastie-picker/blob/main/HEC-cover-for-games.png?raw=true" alt="Ham Ed and Chips Book Cover" class="book-cover">
             </a>
         </div>
         <h1>Ham's Toastie Bar</h1>
@@ -187,24 +194,9 @@
 
 <script>
     const menus = {
-        meat: [
-            "Ham & Extra Mature Cheddar", "Chicken, Pesto & Mozzarella", "Bacon, Brie & Cranberry", 
-            "Tuna Melt with Red Onion & Capers", "Pastrami, Swiss Cheese & Gherkins",
-            "BBQ Pulled Pork & Apple Slaw", "Chorizo, Manchego & Honey", 
-            "Meatball Marinara & Parmesan", "Salami, Jalapeño & Cream Cheese", "Turkey, Stuffing & Gravy Dip"
-        ],
-        vege: [
-            "Fried Egg & Cheddar Cheese", "Kimchi & Sharp Cheddar", "Goats Cheese & Caramelised Onion", 
-            "Spinach, Feta & Sun-dried Tomato", "Tomato, Mozzarella & Basil Pesto",
-            "Brie, Apple & Walnut", "Halloumi, Roasted Pepper & Harissa", 
-            "Mac & Cheese with Truffle Oil", "Pear, Gorgonzola & Honey", "Garlic Butter Mushroom & Swiss Cheese"
-        ],
-        vegan: [
-            "Vegan Cheese, Tomato & Chili Jam", "Hummus, Roasted Peppers & Spinach", "Mushroom Pate & Truffle Oil", 
-            "Vegan Mozzarella & Garlic Mushrooms", "Smashed Avocado & Chili Flakes",
-            "Tofu 'Bacon' & Vegan Smoked Gouda", "Refried Beans, Salsa & Vegan Jack", 
-            "Roasted Squash & Sage Pesto", "Falafel, Tahini & Pickled Cabbage", "Vegan Sausage & Red Onion Marmalade"
-        ]
+        meat: ["Ham & Extra Mature Cheddar", "Chicken, Pesto & Mozzarella", "Bacon, Brie & Cranberry", "Tuna Melt with Red Onion & Capers", "Pastrami, Swiss Cheese & Gherkins", "BBQ Pulled Pork & Apple Slaw", "Chorizo, Manchego & Honey", "Meatball Marinara & Parmesan", "Salami, Jalapeño & Cream Cheese", "Turkey, Stuffing & Gravy Dip"],
+        vege: ["Fried Egg & Cheddar Cheese", "Kimchi & Sharp Cheddar", "Goats Cheese & Caramelised Onion", "Spinach, Feta & Sun-dried Tomato", "Tomato, Mozzarella & Basil Pesto", "Brie, Apple & Walnut", "Halloumi, Roasted Pepper & Harissa", "Mac & Cheese with Truffle Oil", "Pear, Gorgonzola & Honey", "Garlic Butter Mushroom & Swiss Cheese"],
+        vegan: ["Vegan Cheese, Tomato & Chili Jam", "Hummus, Roasted Peppers & Spinach", "Mushroom Pate & Truffle Oil", "Vegan Mozzarella & Garlic Mushrooms", "Smashed Avocado & Chili Flakes", "Tofu 'Bacon' & Vegan Smoked Gouda", "Refried Beans, Salsa & Vegan Jack", "Roasted Squash & Sage Pesto", "Falafel, Tahini & Pickled Cabbage", "Vegan Sausage & Red Onion Marmalade"]
     };
 
     const dips = [
