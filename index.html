@@ -13,7 +13,6 @@
             --orange: #f2631a;
             --blue: #54baf7;
             --yellow: #ffd447;
-            --green: #2ecc71;
         }
 
         body {
@@ -84,8 +83,9 @@
             font-weight: 900;
         }
 
+        /* Updated tagline font size and style */
         .tagline {
-            font-size: 1rem;
+            font-size: 1.2rem; /* Increased size */
             color: #444;
             margin-top: 5px;
             font-weight: 500;
@@ -120,7 +120,7 @@
 
         .button-group {
             display: flex;
-            flex-direction: column; /* Stacked groups for clarity */
+            flex-direction: column;
             gap: 15px;
             margin: 20px 0;
         }
@@ -142,9 +142,10 @@
             text-transform: uppercase;
         }
 
+        /* Color Changes Requested */
         #go-btn { background: var(--purple); color: var(--white); }
-        #surprise-btn { background: var(--yellow); color: var(--black); }
-        #dip-btn { background: var(--green); color: var(--white); width: 100%; }
+        #surprise-btn { background: var(--purple); color: var(--white); } /* Now Purple */
+        #dip-btn { background: var(--orange); color: var(--white); width: 100%; } /* Now Orange */
         
         button:active { transform: scale(0.95); }
 
@@ -180,7 +181,7 @@
             </a>
         </div>
         <h1>Ham's Toastie Bar</h1>
-        <p class="tagline">Having trouble choosing your toastie flavours? Ham's here to help!</p>
+        <p class="tagline">Having trouble choosing your toastie flavours? <b>Ham's here to help!</b></p>
     </div>
     
     <div class="options">
@@ -205,7 +206,7 @@
 
         <span class="label">Side Dip</span>
         <span id="dip-name-out" class="dip-name">—</span>
-        <span id="dip-recipe-out" class="dip-instructions">Click the green button for a dip!</span>
+        <span id="dip-recipe-out" class="dip-instructions">Click the orange button for a dip!</span>
     </div>
 </div>
 
@@ -243,7 +244,6 @@
     const dNameOut = document.getElementById('dip-name-out');
     const dRecOut = document.getElementById('dip-recipe-out');
 
-    // Updated: Logic split into two functions
     function pickToastie(selection) {
         tOut.innerText = selection;
     }
@@ -254,7 +254,6 @@
         dRecOut.innerText = dip.recipe;
     }
 
-    // Event Listeners
     document.getElementById('go-btn').addEventListener('click', () => {
         const diet = document.querySelector('input[name="diet"]:checked').value;
         const list = menus[diet];
