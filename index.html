@@ -13,6 +13,7 @@
             --orange: #f2631a;
             --blue: #54baf7;
             --yellow: #ffd447;
+            --green: #2ecc71;
         }
 
         body {
@@ -33,7 +34,7 @@
             border-radius: 30px;
             box-shadow: 15px 15px 0px var(--black);
             border: 4px solid var(--black);
-            max-width: 600px; /* Increased card width slightly to accommodate bigger images */
+            max-width: 600px;
             width: 100%;
             text-align: center;
         }
@@ -56,16 +57,14 @@
             padding: 10px;
         }
 
-        /* Standard Ham Logo Size */
         .ham-logo {
             max-width: 110px;
             height: auto;
             object-fit: contain;
         }
 
-        /* Book Cover (200% bigger than previous) */
         .book-cover {
-            max-width: 220px; /* Doubled the size from 110px to 220px */
+            max-width: 220px;
             height: auto;
             object-fit: contain;
             transition: transform 0.2s;
@@ -97,7 +96,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin: 25px 0;
+            margin: 20px 0;
         }
 
         .radio-group input { display: none; }
@@ -121,8 +120,14 @@
 
         .button-group {
             display: flex;
+            flex-direction: column; /* Stacked groups for clarity */
             gap: 15px;
-            margin: 25px 0;
+            margin: 20px 0;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
         }
 
         button {
@@ -139,6 +144,8 @@
 
         #go-btn { background: var(--purple); color: var(--white); }
         #surprise-btn { background: var(--yellow); color: var(--black); }
+        #dip-btn { background: var(--green); color: var(--white); width: 100%; }
+        
         button:active { transform: scale(0.95); }
 
         #result-container {
@@ -151,9 +158,15 @@
         }
 
         .label { font-size: 0.8rem; font-weight: 800; color: var(--orange); text-transform: uppercase; display: block; margin-bottom: 5px; }
-        .toastie-text { font-size: 1.5rem; font-weight: 900; color: var(--purple); display: block; margin-bottom: 15px; line-height: 1.2; }
+        .toastie-text { font-size: 1.5rem; font-weight: 900; color: var(--purple); display: block; margin-bottom: 20px; line-height: 1.2; }
         .dip-name { font-size: 1.2rem; font-weight: 700; color: var(--black); display: block; }
         .dip-instructions { font-size: 1rem; color: #555; font-style: italic; display: block; margin-top: 5px; }
+        
+        .divider {
+            height: 2px;
+            background: #ddd;
+            margin: 15px 0;
+        }
     </style>
 </head>
 <body>
@@ -162,7 +175,6 @@
     <div class="header-container">
         <div class="logo-row">
             <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo" class="ham-logo">
-            
             <a href="https://www.waterstones.com/book/ham-ed-and-chips/tom-phipps/9780722356852" target="_blank">
                 <img src="https://github.com/cuppatom99/toastie-picker/blob/main/HEC-cover-for-games.png?raw=true" alt="Ham Ed and Chips Book Cover" class="book-cover">
             </a>
@@ -178,17 +190,22 @@
     </div>
 
     <div class="button-group">
-        <button id="go-btn">GO</button>
-        <button id="surprise-btn">Surprise</button>
+        <div class="row">
+            <button id="go-btn">Pick Toastie</button>
+            <button id="surprise-btn">Surprise Me</button>
+        </div>
+        <button id="dip-btn">Choose Your Dip</button>
     </div>
 
     <div id="result-container">
         <span class="label">Main Event</span>
         <span id="toastie-out" class="toastie-text">Ready to order?</span>
         
+        <div class="divider"></div>
+
         <span class="label">Side Dip</span>
         <span id="dip-name-out" class="dip-name">—</span>
-        <span id="dip-recipe-out" class="dip-instructions">Select a diet and press GO.</span>
+        <span id="dip-recipe-out" class="dip-instructions">Click the green button for a dip!</span>
     </div>
 </div>
 
@@ -226,22 +243,31 @@
     const dNameOut = document.getElementById('dip-name-out');
     const dRecOut = document.getElementById('dip-recipe-out');
 
-    function update(toastie) {
+    // Updated: Logic split into two functions
+    function pickToastie(selection) {
+        tOut.innerText = selection;
+    }
+
+    function pickDip() {
         const dip = dips[Math.floor(Math.random() * dips.length)];
-        tOut.innerText = toastie;
         dNameOut.innerText = dip.name;
         dRecOut.innerText = dip.recipe;
     }
 
+    // Event Listeners
     document.getElementById('go-btn').addEventListener('click', () => {
         const diet = document.querySelector('input[name="diet"]:checked').value;
         const list = menus[diet];
-        update(list[Math.floor(Math.random() * list.length)]);
+        pickToastie(list[Math.floor(Math.random() * list.length)]);
     });
 
     document.getElementById('surprise-btn').addEventListener('click', () => {
         const all = [...menus.meat, ...menus.vege, ...menus.vegan];
-        update(all[Math.floor(Math.random() * all.length)]);
+        pickToastie(all[Math.floor(Math.random() * all.length)]);
+    });
+
+    document.getElementById('dip-btn').addEventListener('click', () => {
+        pickDip();
     });
 </script>
 
