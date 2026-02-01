@@ -47,10 +47,24 @@
             margin-bottom: 20px;
         }
 
-        .header-container img {
-            width: 120px;
+        /* Container for the two images */
+        .logo-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .logo-row img {
+            max-width: 120px;
             height: auto;
             object-fit: contain;
+            transition: transform 0.2s;
+        }
+
+        .logo-row a:hover img {
+            transform: scale(1.05);
         }
 
         h1 {
@@ -137,7 +151,12 @@
 
 <div class="card">
     <div class="header-container">
-        <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo">
+        <div class="logo-row">
+            <img src="https://raw.githubusercontent.com/cuppatom99/toastie-picker/main/Ham.png" alt="Ham Logo">
+            <a href="https://www.waterstones.com/book/ham-ed-and-chips/tom-phipps/9780722356852" target="_blank">
+                <img src="https://github.com/cuppatom99/toastie-picker/blob/main/HEC-cover-for-games.png?raw=true" alt="Ham Ed and Chips Book">
+            </a>
+        </div>
         <h1>Ham's Toastie Bar</h1>
         <p class="tagline">Having trouble choosing your toastie flavours? Ham's here to help!</p>
     </div>
@@ -205,8 +224,7 @@
         { name: "Guacamole", recipe: "Mash avocado with lime juice and salt." },
         { name: "Mango Chutney", recipe: "Serve straight from the jar." },
         { name: "Jalapeño Cream Cheese", recipe: "Mix softened cream cheese with diced jalapeños." },
-        { name: "Barbecue Sauce", recipe: "Serve straight from the bottle." },
-        { name: "Pickled Onion Juice", recipe: "Use the vinegar straight from a pickled onion jar." }
+        { name: "Barbecue Sauce", recipe: "Serve straight from the bottle." }
     ];
 
     const tOut = document.getElementById('toastie-out');
